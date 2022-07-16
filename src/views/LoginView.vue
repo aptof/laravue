@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import GuestLayout from '@/layouts/GuestLayout.vue';
 import AuthCard from '@/components/AuthCard.vue';
-import ApplicationLogo from '@/components/ApplicationLogo.vue';
+import LaravelLogo from '@/components/LaravelLogo.vue';
+import VueLogo from '@/components/VueLogo.vue';
 import Label from '@/components/Label.vue';
 import Input from '@/components/Input.vue';
 import Button from '@/components/Button.vue';
@@ -17,7 +18,8 @@ function submit() {
   <GuestLayout>
     <AuthCard>
       <template #logo>
-        <ApplicationLogo class="w-20 h-20 fill-current text-gray-500"></ApplicationLogo>
+        <LaravelLogo class="w-20 h-20 fill-current text-gray-500"></LaravelLogo>
+        <VueLogo />
       </template>
 
       <!--Session Status-->
