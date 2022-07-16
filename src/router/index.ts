@@ -8,7 +8,8 @@ export enum RouteNames {
   LOGIN = 'login',
   REGISTER = 'register',
   RESET = 'reset',
-  DASHBOARD = 'dashboard'
+  DASHBOARD = 'dashboard',
+  FORGOT = 'forgot'
 }
 
 export const router = createRouter({
@@ -33,7 +34,15 @@ export const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: NotFound
+      component: () => import('../views/RegisterView.vue')
+    },
+    {
+      path: '/forgot',
+      name: RouteNames.FORGOT,
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/ForgotPasswordView.vue')
     },
     {
       path: '/reset',
@@ -41,7 +50,7 @@ export const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: NotFound
+      component:  () => import('../views/ResetView.vue')
     },
     {
       path: '/dashboard',

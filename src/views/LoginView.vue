@@ -17,13 +17,8 @@ function submit() {
 <template>
   <GuestLayout>
     <AuthCard>
-      <template #logo>
-        <LaravelLogo class="w-20 h-20 fill-current text-gray-500"></LaravelLogo>
-        <VueLogo />
-      </template>
-
-      <!--Session Status-->
-      <!--Validation Errors-->
+      <!-- Session Status -->
+      <!-- Validation Errors -->
       <form @submit.prevent="submit">
 
         <!-- Email Address -->
@@ -50,7 +45,7 @@ function submit() {
 
         <div class="flex items-center justify-end mt-4">
 
-          <router-link class="underline text-sm text-gray-600 hover:text-gray-900" :to="{ name: RouteNames.RESET }">
+          <router-link class="underline text-sm text-gray-600 hover:text-gray-900" :to="{ name: RouteNames.FORGOT }">
             Forgot your password?
           </router-link>
 
