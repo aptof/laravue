@@ -7,7 +7,7 @@ export function resetErrors(...args: Ref[]) {
   });
 }
 
-export function serErrors(
+export function setErrors(
   response: AxiosResponse,
   ...args: { key: string; field: Ref }[]
 ) {

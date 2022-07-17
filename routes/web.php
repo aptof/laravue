@@ -18,3 +18,9 @@ Route::get('/', function () {
 });
 
 require __DIR__ . '/auth.php';
+
+
+// This is required as some routes are handled in front end
+Route::fallback(function () {
+    return view('index');
+});
