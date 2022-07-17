@@ -39,7 +39,7 @@ async function submit() {
 }
 
 onMounted(async () => {
-  await csrf();
+  // await csrf();
 });
 </script>
 
@@ -47,7 +47,6 @@ onMounted(async () => {
   <GuestLayout>
     <AuthCard>
       <!-- Session Status -->
-      <!-- Validation Errors -->
       <form @submit.prevent="submit">
 
         <!-- Email Address -->

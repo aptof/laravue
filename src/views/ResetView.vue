@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import GuestLayout from '@/layouts/GuestLayout.vue';
 import AuthCard from '@/components/AuthCard.vue';
@@ -6,6 +7,14 @@ import Label from '@/components/Label.vue';
 import Input from '@/components/Input.vue';
 import Button from '@/components/Button.vue';
 import { RouteNames } from '@/router';
+
+const email = ref('');
+const password = ref('');
+const confirmPassword = ref('');
+
+const emailError = ref('');
+const passwordError = ref('');
+const confirmPasswordError = ref('');
 
 function submit() {
 
@@ -15,28 +24,21 @@ function submit() {
 <template>
   <GuestLayout>
     <AuthCard>
-      <!-- Validation Errors -->
       <form @submit.prevent="submit">
 
         <!-- Password Reset Token -->
 
         <!-- Email Address -->
-        <div>
-          <Label for="email">Email</Label>
-          <Input id="email" class="block mt-1 w-full" type="email" required autofocus />
-        </div>
+        <Input id="email" label="Email" v-model="email" :error="emailError" class="block mt-1 w-full" type="email"
+          required autofocus />
 
         <!-- Password -->
-        <div class="mt-4">
-          <Label for="password">Password</Label>
-          <Input id="password" class="block mt-1 w-full" type="password" required />
-        </div>
+        <Input id="password" label="Password" v-model="password" :error="passwordError" class="block mt-1 w-full"
+          type="password" required />
 
         <!-- Confirm Password -->
-        <div class="mt-4">
-          <Label for="password_confirmation">Confirm Password</Label>
-          <Input id="password_confirmation" class="block mt-1 w-full" type="password" required />
-        </div>
+        <Input id="password_confirmation" label="Confirm Password" v-model="confirmPassword"
+          :error="confirmPasswordError" class="block mt-1 w-full" type="password" required />
 
         <div class="flex items-center justify-end mt-4">
           <Button>
