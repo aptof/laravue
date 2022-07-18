@@ -5,7 +5,6 @@ import { RouteNames } from '@/router';
 import type { AxiosError, } from 'axios';
 import GuestLayout from '@/layouts/GuestLayout.vue';
 import AuthCard from '@/components/AuthCard.vue';
-import Label from '@/components/Label.vue';
 import Input from '@/components/Input.vue';
 import Button from '@/components/Button.vue';
 import { login, csrf } from '@/services/api';

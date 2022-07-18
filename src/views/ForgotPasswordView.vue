@@ -2,7 +2,6 @@
 import { ref } from 'vue';
 import GuestLayout from '@/layouts/GuestLayout.vue';
 import AuthCard from '@/components/AuthCard.vue';
-import Label from '@/components/Label.vue';
 import Input from '@/components/Input.vue';
 import Button from '@/components/Button.vue';
 import { resetErrors } from '@/helpers/errorHelper';
@@ -11,7 +10,7 @@ import { register } from '@/services/api';
 const email = ref('');
 const emailError = ref('');
 
-function submit() {
+async function submit() {
 
 }
 </script>

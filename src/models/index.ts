@@ -9,6 +9,13 @@ export interface User {
   remember: boolean
 }
 
+export interface ResetUser {
+  email: string,
+  token: string,
+  password: string,
+  password_confirmation: string
+}
+
 export interface RegisterUser {
   name: string,
   email: string,

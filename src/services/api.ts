@@ -3,7 +3,8 @@ import type {
   Version,
   User,
   RegisterUser,
-  AuthenticatedUser
+  AuthenticatedUser,
+  ResetUser
 } from '@/models';
 
 export async function getVersion(): Promise<Version> {
@@ -29,4 +30,8 @@ export async function register(user: RegisterUser) {
 
 export async function logout() {
   return await axios.post('api/logout');
+}
+
+export async function reset(user: ResetUser) {
+  return await axios.post('api/reset-password', user);
 }
