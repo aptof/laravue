@@ -8,8 +8,6 @@ export const useUserStore = defineStore('user', {
     }
   },
   getters: {
-    getEmail: (state) => state.email,
-    getName: (state) => state.name,
     isLoggedIn: (state) => {
       if(state.email == '' || state.email == undefined) {
         return false;

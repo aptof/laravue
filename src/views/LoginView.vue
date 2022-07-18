@@ -39,7 +39,7 @@ async function submit() {
 }
 
 onMounted(async () => {
-  // await csrf();
+  await csrf();
 });
 </script>
 

@@ -2,7 +2,8 @@ import axios from "axios";
 import type {
   Version,
   User,
-  RegisterUser
+  RegisterUser,
+  AuthenticatedUser
 } from '@/models';
 
 export async function getVersion(): Promise<Version> {
@@ -15,7 +16,7 @@ export async function csrf() {
 }
 
 export async function getUser() {
-  return await axios.get('api/user');
+  return await axios.get<AuthenticatedUser>('api/user');
 }
 
 export async function login(user: User) {
@@ -24,4 +25,8 @@ export async function login(user: User) {
 
 export async function register(user: RegisterUser) {
   return await axios.post('api/register', user);
+}
+
+export async function logout() {
+  return await axios.post('api/logout');
 }

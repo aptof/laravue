@@ -11,16 +11,19 @@ const version = ref<Version>();
 
 onMounted(async () => {
   version.value = await getVersion();
-
-  // const response = await getUser();
-
+  try {
+    const response = await getUser();
+    store.setUser(response.data.email, response.data.name);
+  } catch (error) {
+    console.log('You are not logged in');
+  }
 })
 </script>
 
 <template>
   <div
     class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-    <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+    <!-- <div class="fixed top-0 right-0 px-6 py-4 sm:block">
       <router-link v-if="store.isLoggedIn" :to="{ name: RouteNames.DASHBOARD }"
         class="text-sm text-gray-700 dark:text-gray-500 underline">
         Dashboard</router-link>
@@ -31,9 +34,23 @@ onMounted(async () => {
           class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">
           Register</router-link>
       </template>
-    </div>
+    </div> -->
 
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+      <div class="flex flex-row justify-end px-6 py-4">
+        <router-link v-if="store.isLoggedIn" :to="{ name: RouteNames.DASHBOARD }"
+          class="text-sm text-gray-700 dark:text-gray-500 underline">
+          Dashboard</router-link>
+        <template v-else>
+          <router-link :to="{ name: RouteNames.LOGIN }" class="text-sm text-gray-700 dark:text-gray-500 underline">Log
+            in
+          </router-link>
+          <router-link :to="{ name: RouteNames.REGISTER }"
+            class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">
+            Register</router-link>
+        </template>
+      </div>
+
       <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
         <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg"
           class="h-16 w-auto text-gray-700 sm:h-20">

@@ -15,3 +15,12 @@ export interface RegisterUser {
   password: string,
   password_confirmation: string
 }
+
+export interface AuthenticatedUser {
+  id: bigint,
+  name: string,
+  email: string,
+  created_at: Date,
+  updated_at: Date,
+  email_verified_at?: Date
+}
