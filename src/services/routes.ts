@@ -1,5 +1,5 @@
 class ApiRoutes {
-  private _prefix = 'api/';
+  private _prefix = '/api/';
 
   private route(suffix:string): string {
     return this._prefix + suffix;

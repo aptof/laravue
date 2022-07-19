@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { RouterLink, useRouter, useRoute } from 'vue-router';
 import GuestLayout from '@/layouts/GuestLayout.vue';
 import AuthCard from '@/components/AuthCard.vue';
@@ -9,8 +9,10 @@ import { RouteNames, router } from '@/router';
 import { resetErrors, setErrors } from '@/helpers/errorHelper';
 import { reset } from '@/services/api';
 import type { AxiosError } from 'axios';
+import { useToast } from 'vue-toastification';
 
 const route = useRoute();
+const toast = useToast();
 
 const email = ref('');
 const password = ref('');
@@ -22,34 +24,36 @@ const passwordError = ref('');
 const confirmPasswordError = ref('');
 
 async function submit() {
-  console.log(token.value);
-  // resetErrors(emailError, passwordError, confirmPasswordError);
-  // try {
-  //   await reset({
-  //     email: email.value,
-  //     password: password.value,
-  //     password_confirmation: confirmPassword.value,
-  //     token.value
-  //   });
-  //   router.push({ name: RouteNames.LOGIN });
-  // } catch (error) {
-  //   const response = (error as AxiosError).response;
-  //   if (response?.status == 422) {
-  //     setErrors(response,
-  //       { key: 'email', field: emailError },
-  //       { key: 'password', field: passwordError },
-  //       { key: 'password_confirmation', field: confirmPasswordError }
-  //     )
-  //   }
-  // }
+  resetErrors(emailError, passwordError, confirmPasswordError);
+  try {
+    await reset({
+      email: email.value,
+      password: password.value,
+      password_confirmation: confirmPassword.value,
+      token: token.value
+    });
+    toast.success('Password reset successful');
+    router.push({ name: RouteNames.LOGIN });
+  } catch (error) {
+    setErrors(error,
+      { key: 'email', field: emailError },
+      { key: 'password', field: passwordError },
+      { key: 'password_confirmation', field: confirmPasswordError }
+    )
+  }
 }
+
+watch(() => route.params.token as string, (newToken) => {
+  token.value = newToken;
+});
+
+watch(() => route.query.email as string, (newEmail) => {
+  email.value = newEmail;
+});
 
 onMounted(() => {
   token.value = route.params.token as string;
-  let routeEmail = route.query.email;
-  if (routeEmail) {
-    email.value = routeEmail as string;
-  }
+  email.value = route.query.email as string;
 })
 </script>
 
