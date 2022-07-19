@@ -1,17 +1,29 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import GuestLayout from '@/layouts/GuestLayout.vue';
 import AuthCard from '@/components/AuthCard.vue';
 import Input from '@/components/Input.vue';
 import Button from '@/components/Button.vue';
-import { resetErrors } from '@/helpers/errorHelper';
-import { register } from '@/services/api';
+import { resetErrors, setErrors } from '@/helpers/errorHelper';
+import { useToast } from 'vue-toastification';
+import { forgot } from '@/services/api';
+import { RouteNames } from '@/router';
 
 const email = ref('');
 const emailError = ref('');
+const toast = useToast();
+const router = useRouter();
 
 async function submit() {
-
+  resetErrors(emailError);
+  try {
+    await forgot(email.value);
+    toast.success('Reset link sent to your email.');
+    router.push({ name: RouteNames.LOGIN });
+  } catch (error) {
+    setErrors(error, { key: 'email', field: emailError });
+  }
 }
 </script>
 

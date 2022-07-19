@@ -22,7 +22,7 @@ const passwordError = ref('');
 const confirmPasswordError = ref('');
 
 async function submit() {
-  console.log(token);
+  console.log(token.value);
   // resetErrors(emailError, passwordError, confirmPasswordError);
   // try {
   //   await reset({
@@ -46,6 +46,10 @@ async function submit() {
 
 onMounted(() => {
   token.value = route.params.token as string;
+  let routeEmail = route.query.email;
+  if (routeEmail) {
+    email.value = routeEmail as string;
+  }
 })
 </script>
 

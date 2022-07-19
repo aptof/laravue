@@ -19,6 +19,9 @@ Route::get('/', function () {
 
 require __DIR__ . '/auth.php';
 
+// Route::get('/password-reset/{hash}', function () {
+//     return view('index');
+// });
 
 // This is required as some routes are handled in front end
 Route::fallback(function () {

@@ -46,7 +46,7 @@ export const router = createRouter({
       component: () => import('../views/ForgotPasswordView.vue')
     },
     {
-      path: '/reset',
+      path: '/password-reset/:token',
       name: RouteNames.RESET,
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route

@@ -3,7 +3,6 @@ import { ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import GuestLayout from '@/layouts/GuestLayout.vue';
 import AuthCard from '@/components/AuthCard.vue';
-import Label from '@/components/Label.vue';
 import Input from '@/components/Input.vue';
 import Button from '@/components/Button.vue';
 import { RouteNames } from '@/router';
@@ -29,15 +28,12 @@ async function submit() {
     await register({ name: name.value, email: email.value, password: password.value, password_confirmation: confirmPassword.value });
     router.push({ name: RouteNames.LOGIN });
   } catch (error) {
-    const response = (error as AxiosError).response;
-    if (response?.status == 422) {
-      setErrors(response,
-        { key: 'name', field: nameError },
-        { key: 'email', field: emailError },
-        { key: 'password', field: passwordError },
-        { key: 'password_confirmation', field: confirmPasswordError },
-      )
-    }
+    setErrors(error,
+      { key: 'name', field: nameError },
+      { key: 'email', field: emailError },
+      { key: 'password', field: passwordError },
+      { key: 'password_confirmation', field: confirmPasswordError },
+    )
   }
 }
 </script>

@@ -2,7 +2,6 @@
 import { onMounted, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { RouteNames } from '@/router';
-import type { AxiosError, } from 'axios';
 import GuestLayout from '@/layouts/GuestLayout.vue';
 import AuthCard from '@/components/AuthCard.vue';
 import Input from '@/components/Input.vue';
@@ -27,13 +26,10 @@ async function submit() {
     await login(user);
     router.push({ name: RouteNames.DASHBOARD });
   } catch (error) {
-    const response = (error as AxiosError).response;
-    if (response?.status == 422) {
-      setErrors(response,
-        { key: 'email', field: emailError },
-        { key: 'password', field: passwordError }
-      )
-    }
+    setErrors(error,
+      { key: 'email', field: emailError },
+      { key: 'password', field: passwordError }
+    )
   }
 }
 
